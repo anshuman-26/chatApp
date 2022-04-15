@@ -66,4 +66,28 @@ public class UserDAO {
 			}
 		}
 	}
+	
+	public static int changePassword(String userid, char[] np) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
+		Connection con = null;
+		PreparedStatement pmt = null;
+		int rs1 = 0;
+		final String sql = "UPDATE users set password=? where userid=?";
+		try {
+		con = CommonDAO.createConnection();
+		pmt = con.prepareStatement(sql);
+		String encryptedpwd = Encryption.passwordEncrypt(new String(np));
+		pmt.setString(1, encryptedpwd);
+		pmt.setString(2, userid);
+		rs1 = pmt.executeUpdate();
+		return rs1;
+		}
+		finally {
+			if(con != null) {
+				con.close();
+			}
+			if(pmt != null) {
+				pmt.close();
+			}
+		}
+	}
 }
