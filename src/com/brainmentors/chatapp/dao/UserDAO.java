@@ -47,14 +47,14 @@ public class UserDAO {
 	
 	//public int add(string userid, char[] password, String city, String address, String phone, String postal, String std)
 	public int add(UserDTO userDTO) throws ClassNotFoundException, SQLException, Exception {
-		System.out.println("Rec: " + userDTO.getUserid() + "  " + userDTO.getPassword());
+		System.out.println("Rec: " + userDTO.getUserid() + "  " + userDTO.getPassword() + " " +userDTO.getEmail() + " " + userDTO.getCity() + " " + userDTO.getPhone());
 		Connection connection = null;
 		Statement stmt = null;
 		try { //guarded region
 		connection = CommonDAO.createConnection();  //Step-1 Create Connection
 		//Step-2 We do a query
 		stmt = connection.createStatement();
-		int record = stmt.executeUpdate("insert into users (userid, password) values('"+userDTO.getUserid()+"', '"+Encryption.passwordEncrypt(new String(userDTO.getPassword()))+"')");  //Insert,Delete,Update
+		int record = stmt.executeUpdate("insert into users (userid, password, email, city, phone) values('"+userDTO.getUserid()+"', '"+Encryption.passwordEncrypt(new String(userDTO.getPassword()))+"', '"+userDTO.getEmail()+"', '"+userDTO.getCity()+"', '"+userDTO.getPhone()+"')");  //Insert,Delete,Update
 		return record;
 		}
 		finally {  //Always execute(Resource Clean)

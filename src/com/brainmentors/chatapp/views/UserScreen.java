@@ -23,6 +23,7 @@ public class UserScreen extends JFrame {
 	private JFrame frame;
 	private JTextField useridtxt;
 	private JPasswordField passwordField;
+	
 
 	
 	public static void main(String[] args) {
@@ -64,28 +65,26 @@ public class UserScreen extends JFrame {
 	}
 	
 	private void register() {
-		String userid = useridtxt.getText();
-		char[] password = passwordField.getPassword();
-		//UserDAO userDAO = new UserDAO();
-		UserDTO userDTO = new UserDTO(userid, password);
-		try {
-		int result = userDAO.add(userDTO);
-		if(result > 0) {
-			//System.out.println("Record Added...");
-			JOptionPane.showMessageDialog(this, "Registered successfully");
-		}else {
-			JOptionPane.showMessageDialog(this, "Registeration fail...");
-		}
-		}
-		catch(ClassNotFoundException |SQLException ex) {
-			System.out.println("DB issue...");
-			ex.printStackTrace();
-		}
-		catch(Exception ex) {
-			System.out.println("Some generic exception raised...");
-			ex.printStackTrace();
-		}
-		System.out.println("Userid: " + userid + " Password: " +password);  //ClassName@HashCode(Hexa)
+		setVisible(false);
+		dispose();
+		
+		Register registeration = new Register();
+		registeration.setVisible(true);
+		
+	}
+	
+	private void clear() {
+		useridtxt.setText("");
+		passwordField.setText("");
+	}
+	
+	
+	private void changePassword() {
+		setVisible(false);
+		dispose();
+		
+		changePassword changepassword = new changePassword();
+		changepassword.setVisible(true);
 	}
 
 	/**
@@ -129,7 +128,7 @@ public class UserScreen extends JFrame {
 			}
 		});
 		loginbt.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		loginbt.setBounds(287, 347, 94, 31);
+		loginbt.setBounds(287, 319, 94, 31);
 		getContentPane().add(loginbt);
 		
 		JButton registerbt = new JButton("Register");
@@ -140,10 +139,30 @@ public class UserScreen extends JFrame {
 			}
 		});
 		registerbt.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		registerbt.setBounds(441, 347, 94, 31);
+		registerbt.setBounds(438, 319, 94, 31);
 		getContentPane().add(registerbt);
+		
+		JButton btnNewButton = new JButton("Clear");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clear();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton.setBounds(601, 324, 85, 21);
+		getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Change Password?");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changePassword();
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_1.setBounds(396, 370, 173, 32);
+		getContentPane().add(btnNewButton_1);
 		setBackground(Color.WHITE);
-		setSize(833, 440);
+		setSize(875, 525);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);

@@ -13,6 +13,10 @@ import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JButton;
+import javax.swing.JRadioButtonMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DashBoard extends JFrame {
 
@@ -31,6 +35,16 @@ public class DashBoard extends JFrame {
 	 * Create the frame.
 	 * @param message 
 	 */
+	
+	private void logout() {
+		setVisible(false);
+		dispose();
+		
+		UserScreen userScreen = new UserScreen();
+		userScreen.setVisible(true);
+	}
+	
+	
 	public DashBoard(String message) {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +58,17 @@ public class DashBoard extends JFrame {
 		
 		JMenuItem startChat = new JMenuItem("Start Chat");
 		chatMenu.add(startChat);
+		
+		JMenu mnNewMenu = new JMenu("MyAccount");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Logout");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logout();
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
