@@ -1,22 +1,21 @@
 package com.brainmentors.chatapp.views;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 import java.awt.Color;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JButton;
-import javax.swing.JRadioButtonMenuItem;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class DashBoard extends JFrame {
 
@@ -57,6 +56,19 @@ public class DashBoard extends JFrame {
 		menuBar.add(chatMenu);
 		
 		JMenuItem startChat = new JMenuItem("Start Chat");
+		startChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					new ClientChatScreen();
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		chatMenu.add(startChat);
 		
 		JMenu mnNewMenu = new JMenu("MyAccount");
